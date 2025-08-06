@@ -5,7 +5,7 @@
 param (
     [Parameter(Mandatory=$true, HelpMessage="Path to the EVTX file")]
     [ValidatePattern("\.evtx$")]
-    [Alias("e")]
+    [Alias("f")]
     [string]$EvtxPath,
     [Parameter(Mandatory=$false, HelpMessage="Path to the output folder for scripts (defaults to 'out' in EVTX directory)")]
     [Alias("o")]

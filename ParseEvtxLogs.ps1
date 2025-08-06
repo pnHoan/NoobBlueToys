@@ -6,7 +6,7 @@
 
 param (
     [Parameter(Mandatory=$true, HelpMessage="Path to folder containing .evtx log files")]
-    [Alias("p")]
+    [Alias("d")]
     [string]$LogFolder,
     [Parameter(Mandatory=$false, HelpMessage="Path to EvtxECmd executable")]
     [Alias("e")]

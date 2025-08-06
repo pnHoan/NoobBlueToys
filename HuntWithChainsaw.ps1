@@ -101,6 +101,7 @@ Write-Host "Processing log files in folder: $LogFolder with Chainsaw"
 # Build Chainsaw hunt command for the entire folder
 $command = "& '$ChainsawPath' hunt '$LogFolder' -s '$SigmaRulesPath' -r '$ChainsawRulesPath' --mapping '$MappingPath'"
 $command_log = "& '$ChainsawPath' hunt '$LogFolder' -s '$SigmaRulesPath' -r '$ChainsawRulesPath' --mapping '$MappingPath'  --output '$txtOutputFile' -q"
+$command_csv = "& '$ChainsawPath' hunt '$LogFolder' -s '$SigmaRulesPath' -r '$ChainsawRulesPath' --mapping '$MappingPath' --csv --output '$txtOutputFolder' -q"
 
 
 # Add severity level filter if specified
@@ -114,6 +115,7 @@ try {
     Write-Host "----------------------------------------"
     Invoke-Expression $command 
     Invoke-Expression $command_log
+    Invoke-Expression $command_csv
     if ($LASTEXITCODE -eq 0) {
         Write-Host "----------------------------------------"
         Write-Host "Successfully saved output to: $txtOutputFile"

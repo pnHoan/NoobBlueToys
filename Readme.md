@@ -59,6 +59,21 @@ Enhanced script to extract PowerShell scripts from event IDs 4103, 4104, and 410
   .\ExtractPowerShellScripts.ps1 -EvtxPath "C:\Logs\PowerShell.evtx" -OutputFolder "C:\Scripts" -SaveAsPS1
   ```
 
+### HuntWithChainsaw.ps1
+
+Automates threat hunting on log files (e.g., .evtx, .json) in a folder using the Chainsaw tool with default Sigma and Chainsaw rules.
+
+```powershell
+.\HuntWithChainsaw.ps1 -p <path_to_folder_with_log_files> [-c <path_to_chainsaw.exe>] [-s <path_to_sigma_rules>] [-r <path_to_chainsaw_rules>] [-m <path_to_sigma_mapping>] [-SeverityLevel <informational|low|medium|high|critical>]
+```
+
+- **Output**: Saves results to a `.txt` file in the `chainsaw` folder within the specified log folder and displays them in the console in a log-like format.
+- **Example**:
+
+  ```powershell
+  .\HuntWithChainsaw.ps1 -p "C:\Logs" -c "D:\Tools\chainsaw.exe" -SeverityLevel critical
+  ```
+
 ### run.bat
 
 Simplifies running the scripts by setting the `EVXTECMD_PATH` environment variable and bypassing PowerShell execution policy.

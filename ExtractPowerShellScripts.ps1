@@ -48,8 +48,8 @@ function ProcessEvtxFile {
 
     # Group events by ScriptBlock ID
     $scriptBlocks = @{}
-    foreach ($event in $events) {
-        $eventId = $event.Id
+    foreach ($evtxEvent in $events) {
+        $eventId = $evtxEvent.Id
         $scriptBlockId = $null
         $scriptContent = $null
         $sequenceNumber = $null
@@ -60,21 +60,21 @@ function ProcessEvtxFile {
 
         if ($eventId -eq 4104) {
             # Script Block Logging
-            $scriptBlockId = $event.Properties[3].Value
-            $scriptContent = $event.Properties[2].Value
-            $sequenceNumber = $event.Properties[0].Value
-            $totalFragments = $event.Properties[1].Value
-            $scriptName = if ($event.Properties[4].Value) { Split-Path -Path $event.Properties[4].Value -Leaf } else { "Script_$scriptBlockId" }
+            $scriptBlockId = $evtxEvent.Properties[3].Value
+            $scriptContent = $evtxEvent.Properties[2].Value
+            $sequenceNumber = $evtxEvent.Properties[0].Value
+            $totalFragments = $evtxEvent.Properties[1].Value
+            $scriptName = if ($evtxEvent.Properties[4].Value) { Split-Path -Path $evtxEvent.Properties[4].Value -Leaf } else { "Script_$scriptBlockId" }
         }
         elseif ($eventId -eq 4103) {
             # Module Logging (Command Invocation)
-            $scriptBlockId = $event.Properties[2].Value
-            $contextInfo = $event.Properties[1].Value
+            $scriptBlockId = $evtxEvent.Properties[2].Value
+            $contextInfo = $evtxEvent.Properties[1].Value
         }
         elseif ($eventId -eq 4105) {
             # Script Block Start
-            $scriptBlockId = $event.Properties[3].Value
-            $startTime = $event.TimeCreated
+            $scriptBlockId = $evtxEvent.Properties[3].Value
+            $startTime = $evtxEvent.TimeCreated
         }
 
         if ($scriptBlockId) {
